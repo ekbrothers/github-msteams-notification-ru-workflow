@@ -1,0 +1,241 @@
+{
+  "type": "message",
+  "attachments": [
+    {
+      "contentType": "application/vnd.microsoft.card.adaptive",
+      "content": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "type": "AdaptiveCard",
+        "version": "1.5",
+        "msteams": {
+          "width": "Full"
+        },
+        "body": [
+          {
+            "type": "ColumnSet",
+            "spacing": "None",
+            "columns": [
+              {
+                "type": "Column",
+                "width": "auto",
+                "verticalContentAlignment": "Center",
+                "items": [
+                  {
+                    "type": "Image",
+                    "url": "${GITHUB_MARK_URL}",
+                    "width": "16px",
+                    "height": "16px",
+                    "altText": "GitHub"
+                  }
+                ]
+              },
+              {
+                "type": "Column",
+                "width": "auto",
+                "verticalContentAlignment": "Center",
+                "items": [
+                  {
+                    "type": "Container",
+                    "style": "warning",
+                    "roundedCorners": true,
+                    "items": [
+                      {
+                        "type": "TextBlock",
+                        "text": "${CHECKS_FAILED} checks failing",
+                        "size": "Small",
+                        "weight": "Bolder",
+                        "color": "Warning",
+                        "wrap": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "Column",
+                "width": "stretch",
+                "verticalContentAlignment": "Center",
+                "items": [
+                  {
+                    "type": "TextBlock",
+                    "text": "${REPO_NAME}",
+                    "size": "Small",
+                    "isSubtle": true,
+                    "wrap": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "RichTextBlock",
+            "spacing": "Small",
+            "inlines": [
+              {
+                "type": "TextRun",
+                "text": "${PR_TITLE}",
+                "size": "Medium",
+                "weight": "Bolder",
+                "selectAction": {
+                  "type": "Action.OpenUrl",
+                  "url": "${PR_URL}"
+                }
+              },
+              {
+                "type": "TextRun",
+                "text": " #${PR_NUMBER}",
+                "size": "Medium",
+                "isSubtle": true
+              }
+            ]
+          },
+          {
+            "type": "ColumnSet",
+            "spacing": "Small",
+            "columns": [
+              {
+                "type": "Column",
+                "width": "auto",
+                "verticalContentAlignment": "Center",
+                "items": [
+                  {
+                    "type": "Image",
+                    "url": "${AUTHOR_AVATAR_URL}",
+                    "style": "Person",
+                    "width": "20px",
+                    "height": "20px",
+                    "altText": "${AUTHOR}"
+                  }
+                ]
+              },
+              {
+                "type": "Column",
+                "width": "stretch",
+                "verticalContentAlignment": "Center",
+                "items": [
+                  {
+                    "type": "RichTextBlock",
+                    "inlines": [
+                      {
+                        "type": "TextRun",
+                        "text": "${AUTHOR}",
+                        "size": "Small"
+                      },
+                      {
+                        "type": "TextRun",
+                        "text": "  for @${REVIEWER}",
+                        "size": "Small",
+                        "isSubtle": true
+                      },
+                      {
+                        "type": "TextRun",
+                        "text": "  ·  ",
+                        "size": "Small",
+                        "isSubtle": true
+                      },
+                      {
+                        "type": "TextRun",
+                        "text": "+${ADDITIONS}",
+                        "size": "Small",
+                        "weight": "Bolder",
+                        "color": "Good"
+                      },
+                      {
+                        "type": "TextRun",
+                        "text": " −${DELETIONS}",
+                        "size": "Small",
+                        "weight": "Bolder",
+                        "color": "Attention"
+                      },
+                      {
+                        "type": "TextRun",
+                        "text": "  ·  ",
+                        "size": "Small",
+                        "isSubtle": true
+                      },
+                      {
+                        "type": "TextRun",
+                        "text": "✕",
+                        "size": "Small",
+                        "weight": "Bolder",
+                        "color": "Warning"
+                      },
+                      {
+                        "type": "TextRun",
+                        "text": " ${CHECKS_PASSED}/${CHECKS_TOTAL} checks",
+                        "size": "Small"
+                      },
+                      {
+                        "type": "TextRun",
+                        "text": "  ·  ",
+                        "size": "Small",
+                        "isSubtle": true
+                      },
+                      {
+                        "type": "TextRun",
+                        "text": "${COPILOT_OPEN} Copilot comment(s) open",
+                        "size": "Small",
+                        "isSubtle": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "RichTextBlock",
+            "spacing": "Small",
+            "inlines": [
+              {
+                "type": "TextRun",
+                "text": "Failing: ",
+                "size": "Small",
+                "isSubtle": true
+              },
+              {
+                "type": "TextRun",
+                "text": "${FAILED_CHECK_1_NAME}",
+                "size": "Small",
+                "underline": true,
+                "selectAction": {
+                  "type": "Action.OpenUrl",
+                  "url": "${FAILED_CHECK_1_URL}"
+                }
+              },
+              {
+                "type": "TextRun",
+                "text": ", ",
+                "size": "Small",
+                "isSubtle": true
+              },
+              {
+                "type": "TextRun",
+                "text": "${FAILED_CHECK_2_NAME}",
+                "size": "Small",
+                "underline": true,
+                "selectAction": {
+                  "type": "Action.OpenUrl",
+                  "url": "${FAILED_CHECK_2_URL}"
+                }
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.OpenUrl",
+            "title": "View failed checks",
+            "url": "${PR_URL}/checks",
+            "style": "positive"
+          },
+          {
+            "type": "Action.OpenUrl",
+            "title": "Open PR",
+            "url": "${PR_URL}"
+          }
+        ]
+      }
+    }
+  ]
+}
